@@ -39,7 +39,6 @@ public class SpawnPlayer : MonoBehaviour
 	private void InstantiatePlayer ()
 	{
 		int point = UnityEngine.Random.Range (0, playerSpawnPoints.Length);
-		print (point);
 		player = Instantiate (Resources.Load ("Prefabs/Player"))as GameObject;
 		player.transform.position = playerSpawnPoints [point].transform.position;
 		player.transform.rotation = playerSpawnPoints [point].transform.rotation;
