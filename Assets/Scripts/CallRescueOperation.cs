@@ -4,28 +4,29 @@ using System.Collections;
 public class CallRescueOperation : MonoBehaviour
 {
 	AudioClip heliCall;
-	GameObject heli;
+	Helicopter heli;
 
 	void Start ()
 	{
-		heli = GameObject.Find ("Helicopter");
+		heli = GameObject.FindObjectOfType<Helicopter> ();
 		heliCall = Resources.Load ("Audio/heli_call") as AudioClip;
+	
 	}
 	// Update is called once per frame
 	void Update ()
 	{
 
-		if (Input.GetButton ("CallHeli")) {
+		if (Input.GetButton ("CallHeli") && !heli.called) {
 			CallRescue ();
 		}
-	
-	
+
 	}
 
 	void CallRescue ()
 	{
-		
+//		source.spatialBlend = 0.0f;
 		AudioSource.PlayClipAtPoint (heliCall, transform.position);
+		heli.ReceiveRescueCall ();
 
 	
 	}
