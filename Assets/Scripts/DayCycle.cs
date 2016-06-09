@@ -13,6 +13,6 @@ public class DayCycle : MonoBehaviour
 	void Update ()
 	{
 		float angle = Time.deltaTime / 360 * minutesPerSecond;
-		transform.RotateAround (transform.position, Vector3.forward, angle);
+		transform.RotateAround (transform.position, Vector3.left, angle);
 	}
 }
