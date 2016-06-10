@@ -1,7 +1,6 @@
 /[Pp]roject/[Ll]ibrary/
 /[Pp]roject/[Tt]emp/
 /[Pp]roject/[Oo]bj/
-/[Pp]roject/[Pp]rojectSettings/
 /[Pp]roject/[Bb]uild/
 /[Pp]roject/[Bb]uilds/
 /[Pp]roject/Assets/AssetStoreTools*
@@ -29,7 +28,6 @@ sysinfo.txt
 Library/
 Temp/
 Obj/
-ProjectSettings/
 Build/
 Builds/
 Assets/AssetStoreTools*
