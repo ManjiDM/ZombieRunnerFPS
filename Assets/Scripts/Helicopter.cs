@@ -7,11 +7,13 @@ public class Helicopter : MonoBehaviour
 	public bool called = false;
 	AudioClip clip;
 	GameObject helicopter;
+	Rigidbody rBody;
 
 	void Awake ()
 	{
 
 		helicopter = GameObject.Find ("Helicopter");
+		rBody = helicopter.GetComponent <Rigidbody> ();
 		helicopter.SetActive (false);
 	}
 	// Use this for initialization
@@ -30,15 +32,24 @@ public class Helicopter : MonoBehaviour
 
 	public void ReceiveRescueCall ()
 	{
+		if (called)
+			return;
 		called = true;
 		   
 		Invoke ("RespondToCall", 10);
+		Invoke ("SendHeli", 13);
 	}
 
 	private void RespondToCall ()
 	{
 //		source.spatialBlend = 0.0f;
 		AudioSource.PlayClipAtPoint (clip, GameObject.Find ("Player").transform.position);
+		Invoke ("SendHeli", 5);
+	}
 
+	void SendHeli ()
+	{
+		helicopter.SetActive (true);
+		rBody.velocity = new Vector3 (0, 0, 50f);
 	}
 }

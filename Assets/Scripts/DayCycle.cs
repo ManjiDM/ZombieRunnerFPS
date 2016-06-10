@@ -6,7 +6,7 @@ public class DayCycle : MonoBehaviour
 {
 
 	[Tooltip ("each second of real life represent minutes in game if value 60")]
-	public float minutesPerSecond = 60;
+	public float minutesPerSecond = 240;
 	private Quaternion startRotation;
 
 	// Update is called once per frame

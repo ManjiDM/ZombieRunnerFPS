@@ -9,7 +9,7 @@ public class ClearArea : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		clearArea = Resources.Load ("Audio/clear_area") as AudioClip;
+		
 	}
 	
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class ClearArea : MonoBehaviour
 		clearTime += Time.deltaTime;
 		if (clearTime > 2f && !areaFound) {
 			areaFound = !areaFound;
-			AudioSource.PlayClipAtPoint (clearArea, transform.parent.position);
+			SendMessageUpwards ("OnFindClearArea");
 		}
 			
 	}
