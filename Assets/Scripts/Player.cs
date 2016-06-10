@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
 	AudioSource[] m_AudioSources;
 	AudioSource m_AudioSource;
+	GameObject flare;
 
 	void Start ()
 	{
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 				m_AudioSource = audioSource;
 			}
 		}
+	
 		heli = GameObject.FindObjectOfType<Helicopter> ();
 		heliCall = Resources.Load ("Audio/heli_call") as AudioClip;
 		clearArea = Resources.Load ("Audio/clear_area") as AudioClip;	
@@ -25,14 +27,7 @@ public class Player : MonoBehaviour
 		m_AudioSource.Play ();
 	}
 	// Update is called once per frame
-	void Update ()
-	{
 
-		if (Input.GetButton ("CallHeli") && !heli.called) {
-			CallRescue ();
-		}
-
-	}
 
 	void CallRescue ()
 	{
@@ -46,5 +41,13 @@ public class Player : MonoBehaviour
 	{
 		m_AudioSource.clip = clearArea;
 		m_AudioSource.Play ();
+		Invoke ("LaunchFlare", clearArea.length + 2f);
+		Invoke ("CallRescue", clearArea.length +	5f);
+	}
+
+	void LaunchFlare ()
+	{
+		flare = Instantiate (Resources.Load ("Prefabs/Flare"), transform.position + Vector3.forward, Quaternion.identity)as GameObject;
+		flare.name = "flare";
 	}
 }

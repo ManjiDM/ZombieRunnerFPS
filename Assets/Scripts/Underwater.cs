@@ -27,7 +27,7 @@ public class Underwater : MonoBehaviour
 		fogColor = RenderSettings.fogColor;
 		fogDensity = RenderSettings.fogDensity;
 		underwaterColor = new Color (.33f, .76f, .88f, .7f);
-		underwaterDensity = .02f;
+		underwaterDensity = .009f;
 	}
 
 	void Update ()

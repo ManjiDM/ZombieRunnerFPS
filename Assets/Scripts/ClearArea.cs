@@ -4,7 +4,7 @@ using System.Collections;
 public class ClearArea : MonoBehaviour
 {
 	AudioClip clearArea;
-	float clearTime	= 0f;
+	public float clearTime	= 0f;
 	bool areaFound = false;
 	// Use this for initialization
 	void Start ()
@@ -16,15 +16,19 @@ public class ClearArea : MonoBehaviour
 	void Update ()
 	{
 		clearTime += Time.deltaTime;
-		if (clearTime > 2f && !areaFound) {
+		if (clearTime > 10f && !areaFound) {
 			areaFound = !areaFound;
 			SendMessageUpwards ("OnFindClearArea");
 		}
 			
 	}
 
-	void OnTriggerStay ()
+	void OnTriggerStay (Collider col)
 	{
-		clearTime = 0f;
+		if (col.name != "Player") {
+			clearTime = 0f;
+		} else
+			print (name + " Collided with " + col.name);
+
 	}
 }

@@ -6,12 +6,13 @@ public class Helicopter : MonoBehaviour
 
 	public bool called = false;
 	AudioClip clip;
+	AudioSource source;
 	GameObject helicopter;
 	Rigidbody rBody;
 
 	void Awake ()
 	{
-
+		source = GetComponent <AudioSource> ();
 		helicopter = GameObject.Find ("Helicopter");
 		rBody = helicopter.GetComponent <Rigidbody> ();
 		helicopter.SetActive (false);
@@ -40,11 +41,12 @@ public class Helicopter : MonoBehaviour
 		Invoke ("SendHeli", 13);
 	}
 
-	private void RespondToCall ()
+	void RespondToCall ()
 	{
 //		source.spatialBlend = 0.0f;
-		AudioSource.PlayClipAtPoint (clip, GameObject.Find ("Player").transform.position);
-		Invoke ("SendHeli", 5);
+		source.clip = clip;
+		source.Play ();
+
 	}
 
 	void SendHeli ()
