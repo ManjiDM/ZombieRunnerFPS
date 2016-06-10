@@ -20,7 +20,7 @@ public class Eyes : MonoBehaviour
 		
 		if (Input.GetButtonDown ("Zoom") && !zoomed) {
 			
-			eyes.fieldOfView /= 3f;
+			eyes.fieldOfView /= 10f;
 		} else if (Input.GetButtonUp ("Zoom")) {
 			eyes.fieldOfView = defaultFOV;
 			zoomed = false;
