@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-	AudioClip heliCall, clearArea, whatHappened;
+	AudioClip heli_call_sound, clear_area_sound, what_happened_sound, flare_sound, fw_launch_sound, fw_blast_sound;
 	Helicopter heli;
 
 	AudioSource[] m_AudioSources;
 	AudioSource m_AudioSource;
-	GameObject flare;
+	GameObject flare, fireworks;
 
 	void Start ()
 	{
@@ -20,10 +20,13 @@ public class Player : MonoBehaviour
 		}
 	
 		heli = GameObject.FindObjectOfType<Helicopter> ();
-		heliCall = Resources.Load ("Audio/heli_call") as AudioClip;
-		clearArea = Resources.Load ("Audio/clear_area") as AudioClip;	
-		whatHappened = Resources.Load ("Audio/what_happened") as AudioClip;	
-		m_AudioSource.clip = whatHappened;
+		heli_call_sound = Resources.Load ("Audio/heli_call") as AudioClip;
+		clear_area_sound = Resources.Load ("Audio/clear_area") as AudioClip;	
+		what_happened_sound = Resources.Load ("Audio/what_happened") as AudioClip;	
+		flare_sound = Resources.Load ("Audio/flare") as AudioClip;	
+		fw_launch_sound = Resources.Load ("Audio/fireworks_launch") as AudioClip;	
+		fw_blast_sound = Resources.Load ("Audio/fireworks_blast") as AudioClip;	
+		m_AudioSource.clip = what_happened_sound;
 		m_AudioSource.Play ();
 	}
 	// Update is called once per frame
@@ -32,22 +35,41 @@ public class Player : MonoBehaviour
 	void CallRescue ()
 	{
 //		source.spatialBlend = 0.0f;
-		m_AudioSource.clip = heliCall;
+		m_AudioSource.clip = heli_call_sound;
 		m_AudioSource.Play ();
 		heli.ReceiveRescueCall ();
 	}
 
 	void OnFindClearArea ()
 	{
-		m_AudioSource.clip = clearArea;
+		m_AudioSource.clip = clear_area_sound;
 		m_AudioSource.Play ();
-		Invoke ("LaunchFlare", clearArea.length + 2f);
-		Invoke ("CallRescue", clearArea.length +	5f);
+		Invoke ("CallRescue", clear_area_sound.length + 2);
+		LaunchVisibleHelp ();
+
+	}
+
+	void LaunchVisibleHelp ()
+	{
+		LaunchFlare ();
+//		Invoke ("LaunchFireworks", clear_area_sound.length + 5f);
+		LaunchFireWorks ();
 	}
 
 	void LaunchFlare ()
 	{
 		flare = Instantiate (Resources.Load ("Prefabs/Flare"), transform.position + Vector3.forward, Quaternion.identity)as GameObject;
 		flare.name = "flare";
+		AudioSource.PlayClipAtPoint (flare_sound, transform.position);
+
+	}
+
+	void LaunchFireWorks ()
+	{
+		fireworks = Instantiate (Resources.Load ("Prefabs/Fireworks"), transform.position + Vector3.forward, Quaternion.identity) as GameObject;
+		fireworks.name = "fireworks";
+		AudioSource.PlayClipAtPoint (fw_launch_sound, transform.position);
+		AudioSource.PlayClipAtPoint (fw_blast_sound, transform.position + Vector3.up * 10);
+
 	}
 }

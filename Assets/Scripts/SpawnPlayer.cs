@@ -28,8 +28,10 @@ public class SpawnPlayer : MonoBehaviour
 
 	private void ReSpawnPlayer ()
 	{
-		if (player)
-			Destroy (player);
+		if (player) {
+			player.SetActive (false);
+		}
+//			Destroy (player);
 		
 	
 		InstantiatePlayer ();
@@ -39,7 +41,8 @@ public class SpawnPlayer : MonoBehaviour
 	private void InstantiatePlayer ()
 	{
 		int point = UnityEngine.Random.Range (0, playerSpawnPoints.Length);
-		player = Instantiate (Resources.Load ("Prefabs/Player"))as GameObject;
+//		player = Instantiate (Resources.Load ("Prefabs/Player"))as GameObject;
+		player.SetActive (true);
 		player.transform.position = playerSpawnPoints [point].transform.position;
 		player.transform.rotation = playerSpawnPoints [point].transform.rotation;
 		player.name = "Player";
